@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WishlistAPI.BLL.Dto;
 using WishlistAPI.BLL.Interfaces;
+using WishlistAPI.BLL.Services;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WishlistAPI.Controllers
 {
@@ -17,33 +18,47 @@ namespace WishlistAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Get()
+        public async Task<ActionResult> GetAllCurrencies()
         {
-            return Ok();
+            var currencies = await currencyService.GetCurrenciesAsync();
+            if (currencies == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return Ok(currencies);
+            }
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> Get(string id)
+        public async Task<ActionResult> GetCurrency(string id)
         {
-            return Ok();
+            var currency = await currencyService.GetCurrencyByIdAsync(id);
+            if (currency == null)
+            {
+                return BadRequest();
+            }
+            return Ok(currency);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] string value)
+        public async Task<ActionResult> Create([FromBody] CreateCurrencyDto currencyDto)
         {
+            await currencyService.CreateCurrencyAsync(currencyDto);
             return Ok();
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, [FromBody] string value)
+        public async Task<ActionResult> Edit([FromBody] UpdateCurrencyDto currencyDto)
         {
             return Ok();
         }
 
-        // DELETE api/<CurrencyController>/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(string id)
         {
+            await currencyService.DeleteCurrencyAsync(id);
             return Ok();
         }
     }

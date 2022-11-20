@@ -2,7 +2,6 @@
 using WishlistAPI.BLL.Dto;
 using WishlistAPI.BLL.Interfaces;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WishlistAPI.Controllers
 {
@@ -44,7 +43,7 @@ namespace WishlistAPI.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] CreateCategoryDto categoryDto)
+        public async Task<ActionResult> Create([FromBody] CreateCategoryDto categoryDto)
         {
             await categoryService.CreateCategoryAsync(categoryDto);
             return Ok();
@@ -52,7 +51,7 @@ namespace WishlistAPI.Controllers
 
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Edit([FromBody] UpdateCategoryDto categoryDto)
         {
 
         }
