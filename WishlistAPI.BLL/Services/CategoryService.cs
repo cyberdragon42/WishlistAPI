@@ -22,14 +22,12 @@ namespace WishlistAPI.BLL.Services
             this.mapper = mapper;
         }
 
-        public async Task CreateCategoryAsync(CreateCategoryDto categoryDto)
+        public async Task<Category> CreateCategoryAsync(CreateCategoryDto categoryDto)
         {
             var category = mapper.Map<CreateCategoryDto, Category>(categoryDto);
-            if (category != null)
-            {
-                await context.Categories.AddAsync(category);
-                await context.SaveChangesAsync();
-            }
+            await context.Categories.AddAsync(category);
+            await context.SaveChangesAsync();
+            return category;
         }
 
         public async Task DeleteCategoryAsync(string id)

@@ -45,15 +45,16 @@ namespace WishlistAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CreateCategoryDto categoryDto)
         {
-            await categoryService.CreateCategoryAsync(categoryDto);
-            return Ok();
+            var category = await categoryService.CreateCategoryAsync(categoryDto);
+            return Ok(category);
         }
 
 
-        [HttpPut("{id}")]
-        public void Edit([FromBody] UpdateCategoryDto categoryDto)
+        [HttpPut]
+        public async Task<ActionResult> Edit([FromBody] UpdateCategoryDto categoryDto)
         {
-
+            await categoryService.UpdateCategoryAsync(categoryDto);
+            return Ok();
         }
 
 
