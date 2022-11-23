@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WishlistAPI.BLL.Dto;
+using WishlistAPI.Domain.Models;
 
 namespace WishlistAPI.BLL.Automapping
 {
@@ -11,7 +13,7 @@ namespace WishlistAPI.BLL.Automapping
     {
         public ItemProfile()
         {
-
+            CreateMap<CreateItemDto, Item>();
         }
     }
 }
