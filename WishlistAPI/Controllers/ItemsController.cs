@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WishlistAPI.BLL.Dto;
 using WishlistAPI.BLL.Interfaces;
+using WishlistAPI.Domain.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,7 +12,7 @@ namespace WishlistAPI.Controllers
     public class ItemsController : ControllerBase
     {
         private readonly IItemService itemService;
-        
+
         public ItemsController(IItemService itemService)
         {
             this.itemService = itemService;
@@ -33,24 +34,26 @@ namespace WishlistAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateItem([FromBody] CreateItemDto itemDto)
+        public async Task<ActionResult> Create([FromBody] CreateItemDto itemDto)
         {
             var item = await itemService.CreateItemAsync(itemDto);
             return Ok(item);
         }
 
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public async Task<ActionResult> Edit([FromBody] UpdateItemDto item)
         {
-
+            await itemService.EditItemAsync(item);
+            return Ok();
         }
 
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult> Delete(string id)
         {
-
+            await itemService.DeleteItemAsync(id);
+            return Ok();
         }
     }
 }

@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 using WishlistAPI.BLL.Dto;
 using WishlistAPI.Domain.Models;
 
-namespace WishlistAPI.BLL.Automapping
+namespace WishlistAPI.BLL.Automapping.Profiles
 {
-    public class CategoryProfile: Profile
+    public class CategoryProfile : Profile
     {
         public CategoryProfile()
         {
             CreateMap<CreateCategoryDto, Category>();
             CreateMap<UpdateCategoryDto, Category>();
+            CreateMap<Category, ShowCategoryDto>();
         }
     }
 }

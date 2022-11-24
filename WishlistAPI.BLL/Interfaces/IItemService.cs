@@ -11,7 +11,9 @@ namespace WishlistAPI.BLL.Interfaces
     public interface IItemService
     {
         Task<Item> CreateItemAsync(CreateItemDto itemDto);
-        Task<IEnumerable<Item>> GetItemsAsync();
-        Task<Item> GetItemByIdAsync(string id);
+        Task<IEnumerable<ShowItemDto>> GetItemsAsync();
+        Task<ShowItemDto> GetItemByIdAsync(string id);
+        Task EditItemAsync(UpdateItemDto itemDto);
+        Task DeleteItemAsync(string id);
     }
 }

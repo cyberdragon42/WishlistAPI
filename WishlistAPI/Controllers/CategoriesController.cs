@@ -45,8 +45,8 @@ namespace WishlistAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CreateCategoryDto categoryDto)
         {
-            var category = await categoryService.CreateCategoryAsync(categoryDto);
-            return Ok(category);
+            await categoryService.CreateCategoryAsync(categoryDto);
+            return Ok();
         }
 
 

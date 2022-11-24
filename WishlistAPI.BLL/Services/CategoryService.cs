@@ -11,7 +11,7 @@ using WishlistAPI.Domain.Models;
 
 namespace WishlistAPI.BLL.Services
 {
-    public class CategoryService: ICategoryService
+    public class CategoryService : ICategoryService
     {
         private readonly WishlistDbContext context;
         private readonly IMapper mapper;
@@ -22,12 +22,11 @@ namespace WishlistAPI.BLL.Services
             this.mapper = mapper;
         }
 
-        public async Task<Category> CreateCategoryAsync(CreateCategoryDto categoryDto)
+        public async Task CreateCategoryAsync(CreateCategoryDto categoryDto)
         {
             var category = mapper.Map<CreateCategoryDto, Category>(categoryDto);
             await context.Categories.AddAsync(category);
             await context.SaveChangesAsync();
-            return category;
         }
 
         public async Task DeleteCategoryAsync(string id)
@@ -40,16 +39,17 @@ namespace WishlistAPI.BLL.Services
             }
         }
 
-        public async Task<IEnumerable<Category>> GetCategoriesAsync()
+        public async Task<IEnumerable<ShowCategoryDto>> GetCategoriesAsync()
         {
-            var categories = context.Categories;
-            return categories;
+            var categories = context.Categories.ToList();
+            var categoryDtos = mapper.Map<IEnumerable<Category>, IEnumerable<ShowCategoryDto>>(categories);
+            return categoryDtos;
         }
 
-        public async Task<Category> GetCategoryByIdAsync(string id)
+        public async Task<ShowCategoryDto> GetCategoryByIdAsync(string id)
         {
             var category = await context.Categories.FindAsync(id);
-            return category;
+            return mapper.Map<Category, ShowCategoryDto>(category);
         }
 
         public async Task UpdateCategoryAsync(UpdateCategoryDto categoryDto)

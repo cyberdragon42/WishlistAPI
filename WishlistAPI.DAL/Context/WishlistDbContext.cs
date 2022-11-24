@@ -8,7 +8,7 @@ using WishlistAPI.Domain.Models;
 
 namespace WishlistAPI.DAL.Context
 {
-    public class WishlistDbContext: DbContext
+    public class WishlistDbContext : DbContext
     {
         public DbSet<Item> Items { get; set; }
         public DbSet<Currency> Currencies { get; set; }
@@ -24,7 +24,7 @@ namespace WishlistAPI.DAL.Context
             modelBuilder.Entity<Currency>(x =>
             {
                 x.Property(y => y.Id).HasDefaultValueSql("NEWID()");
-                x.Property(c=>c.DollarCoefficient).HasColumnType("decimal(4, 2)");
+                x.Property(c => c.DollarCoefficient).HasColumnType("decimal(6, 2)");
 
             });
 
@@ -47,7 +47,7 @@ namespace WishlistAPI.DAL.Context
                 x.HasOne(i => i.Category)
                     .WithMany(c => c.Items)
                     .HasForeignKey(i => i.CategoryId);
-                x.Property(i=>i.Price).HasColumnType("decimal(4, 2)");
+                x.Property(i => i.Price).HasColumnType("decimal(10, 2)");
             });
         }
     }

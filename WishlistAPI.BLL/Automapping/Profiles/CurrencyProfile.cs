@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using WishlistAPI.BLL.Dto;
 using WishlistAPI.Domain.Models;
 
-namespace WishlistAPI.BLL.Automapping
+namespace WishlistAPI.BLL.Automapping.Profiles
 {
-    public class CurrencyProfile: Profile
+    public class CurrencyProfile : Profile
     {
         public CurrencyProfile()
         {

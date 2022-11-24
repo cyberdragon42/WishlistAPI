@@ -10,9 +10,9 @@ namespace WishlistAPI.BLL.Interfaces
 {
     public interface ICategoryService
     {
-        Task<Category> CreateCategoryAsync(CreateCategoryDto categoryDto);
-        Task<Category> GetCategoryByIdAsync(string id);
-        Task<IEnumerable<Category>> GetCategoriesAsync();
+        Task CreateCategoryAsync(CreateCategoryDto categoryDto);
+        Task<ShowCategoryDto> GetCategoryByIdAsync(string id);
+        Task<IEnumerable<ShowCategoryDto>> GetCategoriesAsync();
         Task UpdateCategoryAsync(UpdateCategoryDto categoryDto);
         Task DeleteCategoryAsync(string id);
     }
